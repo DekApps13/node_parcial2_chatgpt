@@ -39,7 +39,22 @@ router.get("/:id",  async (req, res)=>{
 
 router.put("/:id", async (req, res)=>{
     try{
+        const {id} = req.params
+        const {user, password, name} = req.body
+        /*
+        if (password == ""){
+            const up_user = await userModel.findByIdAndUpdate(id, {user, password, name}, {new:true})
+        }else{
+            const salt = byc.genSaltSync(10)
+            const 
+            const up_user = await userModel.findByIdAndUpdate(id, {user, password, name}, {new:true})
+        }
+        */
 
+        const up_user = await userModel.findByIdAndUpdate(id, {user, password, name}, {new:true})
+        if (!up_user)
+            return res.status(404).json({status: "No se encontro el ID"})
+        return res.status(200).json(up_user)
     }catch(error){
         return res.status(500).json({status:"Error en la DDBB"})
     }
@@ -47,7 +62,11 @@ router.put("/:id", async (req, res)=>{
 
 router.delete("/:id", async (req, res)=>{
     try{
-
+        const {id} = req.params
+        const d_user = await userModel.findByIdAndDelete(id)
+        if (!d_user)
+            return res.status(404).json({status: "No se encontro el ID"})
+        return res.status(200).json(d_user)
     }catch(error){
         return res.status(500).json({status:"Error en la DDBB"})
     }
