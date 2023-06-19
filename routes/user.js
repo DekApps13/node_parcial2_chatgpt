@@ -25,15 +25,19 @@ router.post("/", async(req, res)=>{
     }
 })
 
-router.get("/:id", validateToken, async (req, res)=>{
+router.get("/:id",  async (req, res)=>{
     try{
-        
+        const {id} = req.params
+        const k_user = await userModel.findById(id)
+        if (k_user == 0)
+            return res.status(404).json({status: "id de Usuario invalido"})
+        return res.status(200).json(k_user)
     }catch(error){
         return res.status(500).json({status:"Error en la DDBB"})
     }
 })
 
-router.put("/:id", (req, res)=>{
+router.put("/:id", async (req, res)=>{
     try{
 
     }catch(error){
@@ -41,7 +45,7 @@ router.put("/:id", (req, res)=>{
     }
 })
 
-router.delete("/:id", (req, res)=>{
+router.delete("/:id", async (req, res)=>{
     try{
 
     }catch(error){
