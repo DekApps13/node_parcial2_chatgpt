@@ -9,7 +9,7 @@ app.use(express.json())
 app.use("/user", userRuta)
 app.use("/chatgpt", chatgptRuta)
 
-
-app.listen(process.env.PORT, ()=>{
-    console.log("Servidor iniciado")
+const port = process.env.PORT
+app.listen(port, ()=>{
+    console.log(`Servidor iniciado desde el puerto ${port}`)
 })
