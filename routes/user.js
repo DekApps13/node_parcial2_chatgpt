@@ -11,7 +11,7 @@ const validateUser = require("../middleware/validateUser")
 MongoConnect()
 
 //Rutas para /user
-router.post("/", async(req, res)=>{
+router.post("/", validateUser, async(req, res)=>{
     try{
         const {user, name} = req.body
         var password = req.body.password
