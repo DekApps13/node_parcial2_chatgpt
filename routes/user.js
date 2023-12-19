@@ -71,7 +71,7 @@ router.post("/login", async (req, res)=>{
             return res.status(200).json({status: "Usuario o Contraseña Incorrecto"})
         
         //Se crea el Token de Autenticacion con jwt 
-        jwt.sign({c_user}, process.env.LOCALKEY, (error, token)=>{
+        jwt.sign({c_user}, process.env.LOCALKEY, {expiresIn: "24h"}, (error, token)=>{
             if (error)
                 return res.status(500).json({status: "Error - Token no generado"})
             return res.status(201).json(token)

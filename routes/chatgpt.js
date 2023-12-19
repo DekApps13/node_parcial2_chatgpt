@@ -53,7 +53,7 @@ router.get("/:id_ask", validateToken, async (req, res)=>{
         const {id_ask} = req.params
         const ask_gpt = await chatgptModel.findById(id_ask)
         if (!ask_gpt)
-            return res.status(404).json({status: ""})
+            return res.status(404).json({status: "ID incorrecto, este chat no existe"})
         return res.status(200).json(ask_gpt)
     }catch(error){
         return res.status(500).json({status: "Ha ocurrido un error en el Servidor"})
